@@ -1,1 +1,1 @@
-# The resources for understanding and applying deep learniing for correct set of problems
+# The resources for understanding and applying deep learning for correct set of problems
