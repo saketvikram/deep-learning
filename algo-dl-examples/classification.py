@@ -10,6 +10,14 @@ class ClassificationModel(object):
         tf.summary.scalar('accuracy', self.accuracy)
         tf.summary.histogram('inputs', inputs)
 
+    def evaluate_saved_model(self, sess, ckpt_dir):
+        ckpt = tf.train.get_checkpoint_state(ckpt_dir)
+        if ckpt is not None:
+            saver = tf.train.Saver()
+            saver.restore(sess, ckpt.model_checkpoint_path)
+            eval_metrics = sess.run((self.accuracy, self.loss))
+        return eval_metrics    
+
     
     def dataset_from_numpy(self, input_data, batch_size, labels=None, is_training=True, num_epochs=None):
         dataset_input = input_data if labels is None else (input_data, labels)
